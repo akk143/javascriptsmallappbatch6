@@ -3,6 +3,7 @@
 const languages = ['Nodejs','Reactjs','Vuejs','Laravel'];
 const colors = ['red','skyblue','violet','yellow'];
 const gettxtani = document.querySelector('.txtani');
+const gettxtlights = document.querySelectorAll('.text-light')
 
 // console.log(languages);
 // console.log(languages[0]);  // give index get value Nodejs
@@ -61,15 +62,66 @@ function showwords(word){
 
         if(x >= word.length){
             clearInterval(showinterval);
+            deletewords();
         }else{
             gettxtani.innerHTML += word[x];
             x++;
         }
-    },500);
+    },250);
+}
 
+function deletewords(){
+    let getword = gettxtani.innerHTML;
+    // console.log(getword);
 
+    let getlastidx = getword.length-1;
+    // console.log(getlastidx);
+
+    // Nodejs // 0 1 2 3 4 5
+    // Nodej // 0 1 2 3 4 
+    // Node // 0 1 2 3 
+    // Nod // 0 1 2 
+    // No // 0 1 
+    // No// 0 
+
+    let delinterval = setInterval(function(){
+        if(getlastidx = 0){
+            gettxtani.innerHTML = gettxtani.innerHTML.substring(0,gettxtani.innerHTML.length-1);
+            getlastidx--;
+        }else{
+            // remove old color
+            gettxtani.classList.remove(colors[languages.indexOf(getword)]);
+
+            // get new language
+            showwords(languages[testnumber.next().value]); // Nodejs
+            clearInterval(delinterval);
+        }
+
+    },250);    
 
 }
+
+gettxtlights.forEach(function(gettxtlight){
+    // console.log(gettxtlight);
+
+    let arrtexts = gettxtlight.textContent.split("");
+
+    gettxtlight.textContent = "";
+
+    arrtexts.forEach(function(arrtext,idx){
+        // console.log(arrtext);
+        // console.log(idx);
+
+        let newem = document.createElement("em");
+
+        newem.textContent = arrtext;
+        // console.log(newem);
+
+        newem.style.animationDelay = `${idx * 0.5}s`
+
+        gettxtlight.append(newem);
+    });
+});
 
 
 

@@ -45,6 +45,7 @@ em{
 
     animation-name: textlighting;
     animation-duration: .8s;
+    animation-fill-mode: backwards;
 }
 @keyframes textlighting{
     0%{
